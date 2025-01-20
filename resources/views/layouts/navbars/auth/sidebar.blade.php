@@ -27,7 +27,7 @@
                     </a>
                 </li>
             {{-- REGISTRO DE LSB --}}
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link {{ Route::currentRouteName() == 'lsb' ? 'active' : '' }}" href="{{route('dashboard')}}">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <span class="material-icons {{ in_array(request()->route()->getName(),['lsb']) ? 'text-white' : 'text-dark' }}">person</span>
@@ -42,40 +42,40 @@
                         </div>
                         <span class="nav-link-text ms-1"><b>MENÚ</b></span>
                     </a>
-                </li>
+                </li> --}}
             {{-- REGISTRO DE NBC --}}
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link {{ Route::currentRouteName() == 'nbc' ? 'active' : '' }}" href="{{route('dashboard')}}">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <span class="material-icons {{ in_array(request()->route()->getName(),['nbc']) ? 'text-white' : 'text-dark' }}">groups</span>
                         </div>
                         <span class="nav-link-text ms-1"><b>MENÚ</b></span>
                     </a>
-                </li>
+                </li> --}}
 
             <!-- FORMACION -->
              
             @if (auth()->user()->nivel_id == 1)
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link {{ Route::currentRouteName() == 'formacion' ? 'active' : '' }}" href="{{route('dashboard')}}">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <span class="material-icons {{ in_array(request()->route()->getName(),['formacion']) ? 'text-white' : 'text-dark' }}">auto_stories</span>
                         </div>
                         <span class="nav-link-text ms-1"><b>MENÚ</b></span>
                     </a>
-                </li>  
+                </li> --}}
             @endif
 
             {{-- MAPA --}}
             @if (auth()->user()->nivel_id == 1)
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link {{ Route::currentRouteName() == 'mapa' ? 'active' : '' }}" href="{{ route('dashboard') }}">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <span class="material-icons {{ in_array(request()->route()->getName(),['mapa']) ? 'text-white' : 'text-dark' }}">person_pin_circle</span>
                         </div>
                         <span class="nav-link-text ms-1"><b>MENÚ</b></span>
                     </a>
-                </li>
+                </li> --}}
             @endif
 
             {{-- REPORTES --}}
