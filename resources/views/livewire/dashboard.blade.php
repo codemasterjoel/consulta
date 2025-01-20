@@ -9,7 +9,7 @@
                   <div class="numbers">
                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Circuitos</p>
                     <h5 class="font-weight-bolder mb-0">
-                      {{$circuitos->count()}}
+                      {{$circuitos->where('parroquia_id', '<', '20000')->count()}}
                     </h5>
                   </div>
                 </div>
@@ -30,7 +30,7 @@
                   <div class="numbers">
                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Circuitos Cargados</p>
                     <h5 class="font-weight-bolder mb-0">
-                      {{$consultas->count()}}
+                      {{$consultas->where('parroquia_id', '<', '20000')->count()}}
                     </h5>
                   </div>
                 </div>
@@ -87,10 +87,56 @@
         </div>
       </div>
       <div class="row mt-4">
+        <div class="col-4">
+          <div class="card">
+            <div class="card-body p-3">
+              <h5 class=" font-bold text-uppercase">proyectos por estatus</h5>
+              <div class="row">
+                <div class="ms-auto text-center mt-5 mt-lg-0">
+                  <div class=" border-radius-lg h-100">
+                    <canvas id="estatus"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="card">
+            <div class="card-body p-3">
+              <h5 class=" font-bold text-uppercase">proyectos por tipo</h5>
+              <div class="row">
+                <div class="ms-auto text-center mt-5 mt-lg-0">
+                  <div class=" border-radius-lg h-100">
+                    <canvas id="tipo"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
         <div class="col-lg-12 mb-lg-0 mb-4">
           <div class="card">
             <div class="card-body p-3">
-              <h5 class=" font-bold">CIRCUITOS POR PARROQUIA</h5>
+              <h5 class=" font-bold">PROYECTOS POR CATEGORIA</h5>
+              <div class="row">
+                <div class="ms-auto text-center mt-5 mt-lg-0">
+                  <div class=" border-radius-lg h-100">
+                    <canvas id="categoria"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>      
+      <div class="row mt-4">
+        <div class="col-lg-12 mb-lg-0 mb-4">
+          <div class="card">
+            <div class="card-body p-3">
+              <h5 class=" font-bold">PROYECTOS POR PARROQUIA</h5>
               <div class="row">
                 <div class="ms-auto text-center mt-5 mt-lg-0">
                   <div class=" border-radius-lg h-100">
@@ -677,6 +723,250 @@
                     'RGBA(194,239,164, 0.2)',
                     'RGBA(255,0,0, 0.2)'
   
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(166, 101, 80, 1)',
+                    'RGBA(78, 147, 191, 1)',
+                    'RGBA(78,147,93, 1)',
+                    'RGBA(78,146,159, 1)',
+                    'RGBA(78,73,159, 1)',
+                    'RGBA(78,171,24, 1)',
+                    'RGBA(184,76,24, 1)',
+                    'RGBA(184,76,255, 1)',
+                    'RGBA(184,174,164, 1)',
+                    'RGBA(245,174,164, 1)',
+                    'RGBA(194,239,164, 1)',
+                    'RGBA(255,0,0,1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            datalabels:{
+              align: 'end',
+              anchor: 'end',
+              font: function(context) {
+                var w = context.chart.width;
+                return {
+                  size: w < 512 ? 12 : 14,
+                  weight: 'bold',
+                };
+              },
+              color: function(context) {
+                  return context.dataset.borderColor;
+              },
+            },
+            legend: {
+              display: false,
+              position: 'top',
+            },
+            title: {
+              display: false,
+              text: 'Chart.js Bar Chart'
+            }
+          }
+        }
+    });
+  </script>
+
+  <script type="text/javascript">
+    var estatus = document.getElementById('estatus').getContext('2d');
+    var myChartestatus = new Chart(estatus, {
+        type: 'pie',
+        data: {
+            labels: [
+              @foreach ( $circuitoxestatus as $estatus )
+                  '{{$estatus->nombre}}',
+                @endforeach
+            ],
+            datasets: [{
+                label: 'CIRCUITO POR ESTATUS',
+                borderRadius: Number.MAX_VALUE,
+                borderWidth: 4,
+                borderSkipped: false,
+                data: [
+                @foreach ($circuitoxestatus as $estatus)
+                  {{ $estatus->circuitos }},
+                @endforeach
+                ],
+                backgroundColor: [
+                      'rgba(255, 99, 132, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(255, 206, 86, 0.2)',
+                      'rgba(75, 192, 192, 0.2)',
+                      'rgba(153, 102, 255, 0.2)',
+                      'rgba(255, 159, 64, 0.2)'
+
+                ],
+                borderColor: [
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(75, 192, 192, 1)',
+                      'rgba(153, 102, 255, 1)',
+                      'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            datalabels:{
+              align: 'end',
+              anchor: 'end',
+              font: function(context) {
+                var w = context.chart.width;
+                return {
+                  size: w < 512 ? 12 : 14,
+                  weight: 'bold',
+                };
+              },
+              color: function(context) {
+                  return context.dataset.borderColor;
+              },
+            },
+            legend: {
+              position: 'top',
+              display: false,
+            },
+            title: {
+              display: false,
+              text: 'Chart.js Bar Chart'
+            }
+          }
+        }
+    });
+  </script>
+
+  <script type="text/javascript">
+    var tipo = document.getElementById('tipo').getContext('2d');
+    var myCharttipo = new Chart(tipo, {
+        type: 'pie',
+        data: {
+            labels: [
+                @foreach ($circuitoxtipo as $tipos)
+                    "{{ $tipos->nombre }}",
+                @endforeach
+            ],
+            datasets: [{
+                label: 'CIRCUITOS POR TIPO',
+                borderRadius: Number.MAX_VALUE,
+                borderWidth: 4,
+                borderSkipped: false,
+                data: [
+                @foreach ($circuitoxtipo as $tipos)
+                  {{ $tipos->circuitos }},
+                @endforeach
+                ],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)'
+
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            datalabels:{
+              align: 'end',
+              anchor: 'end',
+              font: function(context) {
+                var w = context.chart.width;
+                return {
+                  size: w < 512 ? 12 : 14,
+                  weight: 'bold',
+                };
+              },
+              color: function(context) {
+                  return context.dataset.borderColor;
+              },
+            },
+            legend: {
+              display: false,
+              position: 'top',
+            },
+            title: {
+              display: false,
+              text: 'Chart.js Bar Chart'
+            }
+          }
+        }
+    });
+  </script>
+
+  <script type="text/javascript">
+    var categoria = document.getElementById('categoria').getContext('2d');
+    var myChartcategoria = new Chart(categoria, {
+        type: 'bar',
+        data: {
+            labels: [
+                @foreach ($circuitoxcategoria as $categorias)
+                    "{{ $categorias->nombre }}",
+                @endforeach
+            ],
+            datasets: [{
+                label: 'PROYECTO POR CATEGORIA',
+                borderRadius: Number.MAX_VALUE,
+                borderWidth: 4,
+                borderSkipped: false,
+                data: [
+                @foreach ($circuitoxcategoria as $categorias)
+                  {{ $categorias->circuitos }},
+                @endforeach
+                ],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(166, 101, 80, 0.2)',
+                    'RGBA(78, 147, 191, 0.2)',
+                    'RGBA(78,147,93, 0.2)',
+                    'RGBA(78,146,159, 0.2)',
+                    'RGBA(78,73,159, 0.2)',
+                    'RGBA(78,171,24, 0.2)',
+                    'RGBA(184,76,24, 0.2)',
+                    'RGBA(184,76,255, 0.2)',
+                    'RGBA(184,174,164, 0.2)',
+                    'RGBA(245,174,164, 0.2)',
+                    'RGBA(194,239,164, 0.2)',
+                    'RGBA(255,0,0, 0.2)'
+
                 ],
                 borderColor: [
                     'rgba(255, 99, 132, 1)',
