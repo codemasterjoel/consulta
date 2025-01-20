@@ -90,7 +90,7 @@
         <div class="col-lg-12 mb-lg-0 mb-4">
           <div class="card">
             <div class="card-body p-3">
-              <h5 class=" font-bold">LSB POR ESTADO</h5>
+              <h5 class=" font-bold">CIRCUITOS POR PARROQUIA</h5>
               <div class="row">
                 <div class="ms-auto text-center mt-5 mt-lg-0">
                   <div class=" border-radius-lg h-100">

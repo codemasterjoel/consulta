@@ -35,7 +35,8 @@ class Index extends Component
 
     public function render()
     {
-        $this->parroquias = parroquia::pluck('nombre', 'id');
+        $this->parroquias = parroquia::where('parroquia_id', '<', '20000')
+            ->pluck('nombre', 'id');
         // $this->ejes = eje::pluck('nombre', 'id');
         // $this->circuitos = circuito::pluck('nombre', 'id');
         $this->tipos = tipo::pluck('nombre', 'id');
@@ -43,7 +44,8 @@ class Index extends Component
         // $this->categorias = categoria::pluck('nombre', 'id');
         // $this->subcategorias = subcategoria::pluck('nombre', 'id');
         $consultas = consulta::where('nombre', 'like', "%$this->search%")
-        ->paginate(5);
+            ->where('id', '<>', '1')
+            ->paginate(5);
 
         return view('livewire.consulta.index', ['consultas'=>$consultas]);
     }

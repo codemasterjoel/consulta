@@ -11,6 +11,7 @@ class CircuitoSeeder extends Seeder
     public function run(): void
     {
         Circuito::insert([
+            ['parroquia_id' =>'100000', 'nombre' => 'NULL'],
             ['parroquia_id' =>'10111', 'nombre' => '13 DE ABRIL CHAVEZ PUEBLO REBELDE'],
             ['parroquia_id' =>'10111', 'nombre' => 'FE SOCIALISTA'],
             ['parroquia_id' =>'10111', 'nombre' => 'INDEPENDENCIA REVOLUCIONARIA'],

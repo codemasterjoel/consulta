@@ -32,7 +32,8 @@ class ParroquiaSeeder extends Seeder
             ['id' => '10120', 'nombre' => 'SAN PEDRO', 'parroquia_id' => '10120'],
             ['id' => '10108', 'nombre' => 'SANTA ROSALIA', 'parroquia_id' => '10108'],
             ['id' => '10109', 'nombre' => 'SANTA TERESA', 'parroquia_id' => '10109'],
-            ['id' => '10110', 'nombre' => 'SUCRE', 'parroquia_id' => '10110']
+            ['id' => '10110', 'nombre' => 'SUCRE', 'parroquia_id' => '10110'],
+            ['id' => '100000', 'nombre' => 'Z', 'parroquia_id' => '100000']
         ]);
     }
 }
