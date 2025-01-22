@@ -15,6 +15,7 @@ use App\Http\Livewire\StaticSignUp;
 use App\Http\Livewire\Rtl;
 use App\Http\Livewire\LaravelExamples\UserProfile;
 use App\Http\Livewire\LaravelExamples\UserManagement;
+use App\Http\Livewire\PrimSeguConsulta\Index as PrimSeguConsulta;
 
 use App\Http\Livewire\Consulta\Index as consulta;
 
@@ -26,6 +27,7 @@ Route::get('/', function() {
 });
 Route::middleware('auth')->group(function(){
     Route::get('/consulta', consulta::class)->name('consulta');
+    Route::get('/primseguconsulta', PrimSeguConsulta::class)->name('PrimSeguConsulta');
 });
 
 Route::get('/logout', function() {Auth::logout(); return redirect('/login'); })->name('logout');
