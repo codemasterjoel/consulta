@@ -50,9 +50,11 @@
                                 @else
                                 @endif
                             </table>
-                            {{$consultas->links('pagination::Bootstrap-4')}}
                         </div>
                     </div>
+                    <div class="card-footer">
+                        {{$consultas->links()}}
+                   </div>
             </div>
         </div>
     </div>
